@@ -1,6 +1,5 @@
 import './style.css'
-
-
+// Video toggle logic
 const lofiVideos = [
 "https://www.youtube-nocookie.com/embed/jfKfPfyJRdk?si=RTPb4tYeWK15lZeV",
 "https://www.youtube-nocookie.com/embed/rPjez8z61rI?si=Nyna9kFGtDVp1dxW",
@@ -10,7 +9,7 @@ const lofiVideos = [
 ];
 
 const iframe = document.getElementById("dyanoFrame");
-const button = document.getElementById("change-video");
+const button = document.getElementById("changeVideo");
 
 let currentIndex = 1;
 
@@ -21,6 +20,8 @@ function changeIframeSource(){
 
 button.addEventListener("click", changeIframeSource)
 
+
+// Light-Dark Mode
 function calculateSettingAsThemeString({localStorageTheme,systemSettingDark}){
     if(localStorageTheme !== null){
         return localStorageTheme

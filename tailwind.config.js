@@ -6,8 +6,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      colors:{
+    extend: { 
+      
+      colors:{ 
         primary:{
           light: "#303ce3",
           dark: '#a2a6db'
@@ -20,6 +21,7 @@ export default {
           light:'#11121c',
           dark:'#f2f3f7'
         }
+
       }
     },
   },
