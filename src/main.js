@@ -26,9 +26,9 @@ function calculateSettingAsThemeString({localStorageTheme,systemSettingDark}){
         return localStorageTheme
     }
     if(systemSettingDark.matches){
-        return 'dark';
+        return 'light';
     }
-    return 'light';
+    return 'dark';
 }
 const themeButton = document.getElementById('toggle')
 
