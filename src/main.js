@@ -20,3 +20,30 @@ function changeIframeSource(){
 }
 
 button.addEventListener("click", changeIframeSource)
+
+function calculateSettingAsThemeString({localStorageTheme,systemSettingDark}){
+    if(localStorageTheme !== null){
+        return localStorageTheme
+    }
+    if(systemSettingDark.matches){
+        return 'dark';
+    }
+    return 'light';
+}
+const themeButton = document.getElementById('toggle')
+
+const localStorageTheme =localStorage.getItem('theme');
+const systemSettingDark = window.matchMedia("(prefers-color-scheme:dark)")
+
+let currentThemeSetting = calculateSettingAsThemeString({localStorageTheme,systemSettingDark})
+
+document.documentElement.classList.add(currentThemeSetting)
+
+themeButton.addEventListener('click', ()=>{
+    const newTheme = currentThemeSetting ==="dark" ? "light" : "dark";
+    localStorage.setItem("theme", newTheme)
+    currentThemeSetting=newTheme;
+
+    document.documentElement.classList.remove("light","dark");
+    document.documentElement.classList.add(newTheme)
+})
