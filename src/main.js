@@ -48,3 +48,6 @@ themeButton.addEventListener('click', ()=>{
     document.documentElement.classList.remove("light","dark");
     document.documentElement.classList.add(newTheme)
 })
+
+
+document.getElementById('footerDate').innerHTML= new Date().getFullYear();
