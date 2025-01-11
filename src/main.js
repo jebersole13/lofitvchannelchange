@@ -1,5 +1,5 @@
 const iframe = document.getElementById("dyanoFrame");
-const button = document.getElementById("changeVideo");
+const button = document.getElementById("changeChannel");
 const addChannelForm = document.getElementById("addChannelForm");
 const channelInput = document.getElementById("channelInput");
 const channelList = document.getElementById("channelList");
@@ -11,7 +11,7 @@ const lofiChannels = JSON.parse(localStorage.getItem("lofiChannels")) || [
   { url: "https://www.youtube-nocookie.com/embed/qnStVGoIgBA?si=B-ZwGRqjE5sDic8a", title: "Relaxing Lofi Beats" },
 ];
 
-let currentIndex = 0;
+let currentIndex = 1;
 
 function changeIframeSource() {
   iframe.src = lofiChannels[currentIndex].url;
