@@ -1,8 +1,12 @@
+import sunIcon from './assets/sun.png';
+import moonIcon from './assets/moon.png';
+
 const iframe = document.getElementById("dyanoFrame");
 const button = document.getElementById("changeChannel");
 const addChannelForm = document.getElementById("addChannelForm");
 const channelInput = document.getElementById("channelInput");
 const channelList = document.getElementById("channelList");
+
 
 const lofiChannels = JSON.parse(localStorage.getItem("lofiChannels")) || [
   { url: "https://www.youtube-nocookie.com/embed/jfKfPfyJRdk?si=RTPb4tYeWK15lZeV", title: "Lofi Girl – Chill Beats" },
@@ -112,9 +116,21 @@ function calculateSettingAsThemeString({ localStorageTheme, systemSettingDark })
     return localStorageTheme;
   }
   if (systemSettingDark.matches) {
-    return 'light';
+    return 'dark';
   }
-  return 'dark';
+  return 'light';
+}
+function updateButton({ buttonEl, isDark }) {
+  const themeIcon = buttonEl.querySelector("#darkLightTheme");
+  const newSrc = isDark ? sunIcon : moonIcon;
+  const newAlt = isDark ? "Sun Icon" : "Moon Icon";
+
+  themeIcon.src = newSrc;
+  themeIcon.alt = newAlt;
+  buttonEl.setAttribute(
+    "aria-label",
+    isDark ? "Switch to Light Mode" : "Switch to Dark Mode"
+  );
 }
 
 const themeButton = document.getElementById('toggle');
@@ -125,13 +141,25 @@ let currentThemeSetting = calculateSettingAsThemeString({ localStorageTheme, sys
 
 document.documentElement.classList.add(currentThemeSetting);
 
-themeButton.addEventListener('click', () => {
+
+themeButton.addEventListener("click", () => {
   const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
   localStorage.setItem("theme", newTheme);
   currentThemeSetting = newTheme;
 
+  updateButton({
+    buttonEl: themeButton,
+    isDark: newTheme === "dark",
+  });
+
   document.documentElement.classList.remove("light", "dark");
   document.documentElement.classList.add(newTheme);
+});
+
+
+updateButton({
+  buttonEl: themeButton,
+  isDark: currentThemeSetting === "dark",
 });
 
 document.getElementById('footerDate').innerHTML = new Date().getFullYear();
