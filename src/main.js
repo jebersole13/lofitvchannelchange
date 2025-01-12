@@ -5,6 +5,7 @@ const iframe = document.getElementById("dyanoFrame");
 const button = document.getElementById("changeChannel");
 const addChannelForm = document.getElementById("addChannelForm");
 const channelInput = document.getElementById("channelInput");
+const titleInput = document.getElementById("titleInput")
 const channelList = document.getElementById("channelList");
 
 
@@ -29,7 +30,18 @@ function parseChannelURL(url) {
   return match ? `https://www.youtube-nocookie.com/embed/${match[1]}` : null;
 }
 
+  function addTitle() {
+    const title= titleInput.value;
+    const trimmedTitle= title.trim();
+    if(!trimmedTitle){
+      alert("Please enter title")
+      return null
+    }
+    return trimmedTitle
+  }
+
 function addChannel(e) {
+  
   e.preventDefault();
   const userURL = channelInput.value.trim();
   const embedURL = parseChannelURL(userURL);
@@ -39,21 +51,21 @@ function addChannel(e) {
     return;
   }
 
-  const videoTitle = prompt("Enter a title for this video:");
-  if (!videoTitle || videoTitle.trim() === "") {
-    alert("Title cannot be empty.");
-    return;
-  }
+  const newTitle = addTitle()
 
   lofiChannels.push({
     url: embedURL,
-    title: videoTitle.trim(),
+    title: newTitle
   });
 
   channelInput.value = "";
   savePlaylist();
   renderPlaylist();
 }
+
+
+
+
 
 function savePlaylist() {
   localStorage.setItem("lofiChannels", JSON.stringify(lofiChannels));
