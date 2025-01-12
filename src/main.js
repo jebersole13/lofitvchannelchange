@@ -116,9 +116,14 @@ document.getElementById('resetChannels').addEventListener('click', () => {
 
   // Reset the playlist in localStorage
   localStorage.setItem("lofiChannels", JSON.stringify(defaultPlaylist));
-  location.reload();
-});
 
+  // Update the in-memory playlist array
+  lofiChannels.length = 0; // Clear the current array
+  lofiChannels.push(...defaultPlaylist);
+
+  // Dynamically re-render the playlist
+  renderPlaylist();
+});
 // Light-Dark Mode
 function calculateSettingAsThemeString({ localStorageTheme, systemSettingDark }) {
   if (localStorageTheme !== null) {
