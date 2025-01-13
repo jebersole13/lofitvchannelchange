@@ -74,7 +74,7 @@ function renderPlaylist() {
 
     listItem.innerHTML = `
       <span class=' lg:text-3xl text-base flex flex-col gap-4  border-blue-500 border-8'> <div>
-              ${video.title || `Video ${index + 1}`}    <button class='remove-button bg-red-300 hover:bg-red-700  text-black font-semibold hover:text-white p-1 border-fuchsia-900 ' data-index="${index}">
+         <button type='button' class='channelButton' data-index='${index}' >${video.title || `Video ${index + 1}`}  </button>        <button class='remove-button bg-red-300 hover:bg-red-700  text-black font-semibold hover:text-white p-1 border-fuchsia-900 ' data-index="${index}">
         Remove
       </button>
       </div>
@@ -86,6 +86,16 @@ function renderPlaylist() {
     channelList.appendChild(listItem);
   });
 
+
+  const channelButtons = document.querySelectorAll(".channelButton");
+  channelButtons.forEach((button) =>
+    button.addEventListener("click", (e) => {
+      const index = e.target.dataset.index;
+      playChannel(index);
+    })
+  );
+
+
   const removeButtons = document.querySelectorAll(".remove-button");
   removeButtons.forEach((button) =>
     button.addEventListener("click", (e) => {
@@ -93,6 +103,12 @@ function renderPlaylist() {
       removeVideo(index);
     })
   );
+  
+}
+
+function playChannel(index){
+  iframe.src =lofiChannels[index].url;
+  currentIndex=index
 }
 
 function removeVideo(index) {
