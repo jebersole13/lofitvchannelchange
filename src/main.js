@@ -8,6 +8,7 @@ const channelInput = document.getElementById("channelInput");
 const titleInput = document.getElementById("titleInput")
 const channelList = document.getElementById("channelList");
 
+//default channels
 
 const lofiChannels = JSON.parse(localStorage.getItem("lofiChannels")) || [
   { url: "https://www.youtube-nocookie.com/embed/jfKfPfyJRdk?si=RTPb4tYeWK15lZeV", title: "Lofi Girl – Chill Beats" },
@@ -16,7 +17,9 @@ const lofiChannels = JSON.parse(localStorage.getItem("lofiChannels")) || [
   { url: "https://www.youtube-nocookie.com/embed/qnStVGoIgBA?si=B-ZwGRqjE5sDic8a", title: "Relaxing Lofi Beats" },
 ];
 
+//starting at 1 so we can go to the second channel
 let currentIndex = 1;
+
 
 function changeIframeSource() {
   iframe.src = lofiChannels[currentIndex].url;
@@ -30,7 +33,9 @@ function parseChannelURL(url) {
   return match ? `https://www.youtube-nocookie.com/embed/${match[1]}` : null;
 }
 
-  function addTitle() {
+//Adds title to channel
+
+function addTitle() {
     const title= titleInput.value;
     const trimmedTitle= title.trim();
     if(!trimmedTitle){
@@ -40,6 +45,7 @@ function parseChannelURL(url) {
     return trimmedTitle
   }
 
+//  Adds channel to channel list
 function addChannel(e) {
   
   e.preventDefault();
@@ -62,6 +68,8 @@ function addChannel(e) {
   savePlaylist();
   renderPlaylist();
 }
+
+//Keeps channel list in local storage
 function savePlaylist() {
   localStorage.setItem("lofiChannels", JSON.stringify(lofiChannels));
 }
@@ -86,9 +94,9 @@ function renderPlaylist() {
     channelList.appendChild(listItem);
   });
 
-
-  const channelButtons = document.querySelectorAll(".channelButton");
-  channelButtons.forEach((button) =>
+//To click for new channel from channel list
+  const channelClick = document.querySelectorAll(".channelButton");
+  channelClick.forEach((button) =>
     button.addEventListener("click", (e) => {
       const index = e.target.dataset.index;
       playChannel(index);
