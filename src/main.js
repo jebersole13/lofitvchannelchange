@@ -82,7 +82,7 @@ function renderPlaylist() {
 
     listItem.innerHTML = `
       <span class=' lg:text-3xl text-base flex flex-col gap-4  border-blue-500 border-8'> 
-         <button type='button' class='channelButton hover:bg-blue-300 hover:dark:bg-indigo-700 ' data-index='${index}' >${video.title || `Video ${index + 1}`}  </button>        <button class='remove-button bg-red-300 hover:bg-red-700  text-black font-semibold hover:text-white  border-fuchsia-900 ' data-index="${index}">
+         <button type='button' class='channelButton hover:bg-blue-300 dark:hover:bg-indigo-700 ' data-index='${index}' >${video.title || `Video ${index + 1}`}  </button>        <button class='remove-button bg-red-300 hover:bg-red-700  text-black font-semibold hover:text-white  border-fuchsia-900 ' data-index="${index}">
         Remove
       </button>
       
